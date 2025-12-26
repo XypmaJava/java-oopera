@@ -4,23 +4,21 @@ public class Theatre {
     public static void main(String[] args) {
 
         ArrayList<Actor> actors = new ArrayList<>();
-        ArrayList<Director> directors = new ArrayList<>();
 
         actors.add(new Actor("Александр", "Мурашкинцев", Gender.MALE, 170));
         actors.add(new Actor("Дамир", "Валиев", Gender.MALE, 168));
         actors.add(new Actor("Лилия", "Асмандиярова", Gender.FEMALE, 162));
 
-        directors.add(new Director("Ильяс", "Ларионов", Gender.MALE, 1));
-        directors.add(new Director("Ксения", "Ларионова", Gender.FEMALE, 2));
+        Director director = new Director("Ксения", "Ларионова", Gender.FEMALE, 2);
 
         Person musicAuthor = new Person("Алсу", "Насырова", Gender.FEMALE); //автор музыки
 
         Person choreographer = new Person("Стелла", "Ларионова", Gender.FEMALE); //хореограф
 
-        Show regularShow = new Show("Обычный спектакль", 120, new ArrayList<>(), new ArrayList<>());
-        Opera operaShow = new Opera("Оперный спектакль", 90, new ArrayList<>(), new ArrayList<>(),
+        Show regularShow = new Show("Обычный спектакль", 120, new ArrayList<>(), director);
+        Opera operaShow = new Opera("Оперный спектакль", 90, new ArrayList<>(), director,
                 musicAuthor, "Текст либретто оперы", 12);
-        Ballet balletShow = new Ballet("Балет", 60, new ArrayList<>(), new ArrayList<>(),
+        Ballet balletShow = new Ballet("Балет", 60, new ArrayList<>(), director,
                 musicAuthor, "Текст либретто балета", choreographer);
 
         // Добавляем актёров в спектакли
@@ -30,11 +28,6 @@ public class Theatre {
 
         // Один актёр может участвовать в нескольких спектаклях
         regularShow.addActor(actors.get(1)); // Дамир Валиев также участвует в обычном спектакле
-
-        // Добавляем режиссёров в спектакли
-        regularShow.addDirector(directors.get(0)); //Ильяс Ларионов режиссирует обычный спектакль
-        operaShow.addDirector(directors.get(1)); //Ксения Ларионова режиссирует оперу
-        balletShow.addDirector(directors.get(1)); //Ксения Ларионова режиссирует балет
 
         System.out.println(regularShow);
         System.out.println("\nАктёры обычного спектакля:");
@@ -48,12 +41,12 @@ public class Theatre {
         System.out.println("\nАктёры балета:");
         balletShow.printListOfActors();
 
-        regularShow.replaceActor(actors.get(2), "Валиев"); //замена актёра
+        regularShow.replaceActor(actors.get(2), "Валиев", "Дамир"); //замена актёра
 
         System.out.println("\nАктёры обычного спектакля:");
         regularShow.printListOfActors();
 
-        operaShow.replaceActor(actors.get(1), "Зорин");
+        operaShow.replaceActor(actors.get(1), "Зорин", "Дмитрий");
 
         System.out.println("\nТекст либретто оперного спектакля:");
         operaShow.printLibrettoText();

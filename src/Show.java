@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 public class Show {
     protected String title; //название
-    protected double duration; //длительность в минутах
-    protected ArrayList<Director> listOfDirectors; //режиссёр
-    protected ArrayList<Actor> listOfActors; //список актёров
+    protected int duration; //длительность в минутах
+    protected Director director; //режиссёр
+    protected ArrayList<Actor> listOfActors = new ArrayList<>(); //список актёров
 
-    public Show(String title, double duration, ArrayList<Actor> listOfActors, ArrayList<Director> listOfDirectors) {
+    public Show(String title, int duration, ArrayList<Actor> listOfActors, Director director) {
         this.title = title;
         this.duration = duration;
         this.listOfActors = listOfActors;
-        this.listOfDirectors = listOfDirectors;
+        this.director = director;
     }
 
     public void addActor(Actor actor) { //добавление актёров
@@ -21,18 +21,18 @@ public class Show {
         }
     }
 
-    public void replaceActor(Actor newActor, String surname) {
+    public void replaceActor(Actor newActor, String surname, String name) {
         boolean found = false;
         for (int i = 0; i < listOfActors.size(); i++) {
             Actor actor = listOfActors.get(i);
-            if (actor.surname.equals(surname)) {
+            if (actor.surname.equals(surname) && actor.name.equals(name)) {
                 listOfActors.set(i, newActor);
                 found = true;
                 break;
             }
         }
         if (!found) {
-            System.out.println("Актёр с такой фамилией не найден.");
+            System.out.println("Актёр с такой фамилией и именем не найден.");
         }
     }
 
@@ -42,19 +42,11 @@ public class Show {
         }
     }
 
-    public void addDirector(Director director) {
-        if (listOfDirectors.contains(director)) {
-            System.out.println("Добавление невозможно, режиссёр уже указан");
-        } else {
-            listOfDirectors.add(director);
-        }
-    }
-
     @Override
     public String toString() {
         return "Название='" + title + '\'' +
                 ", длительность (мин.)=" + duration +
-                ", режиссёр=" + listOfDirectors;
+                ", режиссёр=" + director;
     }
 }
 

@@ -4,9 +4,9 @@ public class MusicalShow extends Show {
     protected Person musicAuthor; //автор музыки
     protected String librettoText; //текст либретто
 
-    public MusicalShow(String title, double duration, ArrayList<Actor> listOfActors, ArrayList<Director> listOfDirectors,
+    public MusicalShow(String title, int duration, ArrayList<Actor> listOfActors, Director director,
                        Person musicAuthor, String librettoText) {
-        super(title, duration, listOfActors, listOfDirectors);
+        super(title, duration, listOfActors, director);
         this.librettoText = librettoText;
         this.musicAuthor = musicAuthor;
     }
@@ -20,7 +20,7 @@ public class MusicalShow extends Show {
         this.musicAuthor = musicAuthor;
     }
 
-    void printLibrettoText() {
+    public void printLibrettoText() {
         System.out.println(librettoText);
     }
 
@@ -28,8 +28,7 @@ public class MusicalShow extends Show {
     public String toString() {
         return "Название='" + title + '\'' +
                 ", длительность=" + duration +
-                ", режиссёр=" + listOfDirectors +
-                "автор музыки=" + musicAuthor +
-                '}';
+                ", режиссёр=" + director +
+                "автор музыки=" + musicAuthor;
     }
 }
